@@ -9,3 +9,24 @@ class StudentProfile(models.Model):
 
     def __str__(self):
         return f"{self.user.username} - {self.roll_number}"
+    
+
+
+
+class Course(models.Model):
+    name = models.CharField(max_length= 20)
+    description = models.TextField()
+
+    def __str__(self):
+        return self.name
+
+class Student(models.Model):
+    name = models.CharField(max_length= 30)
+    email = models.EmailField(unique=True)
+
+    course = models.ManyToManyField(Course, on_delete = models.CASCADE, related_name='students')
+
+    def __str__(self):
+        return self.name
+
+
