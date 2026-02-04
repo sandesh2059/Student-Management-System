@@ -24,7 +24,7 @@ class Student(models.Model):
     name = models.CharField(max_length= 30)
     email = models.EmailField(unique=True)
 
-    course = models.ManyToManyField(Course, on_delete = models.CASCADE, related_name='students')
+    course = models.ManyToManyField(Course,  related_name='students')
 
     def __str__(self):
         return self.name
@@ -33,9 +33,9 @@ class Teacher(models.Model):
     name = models.CharField(max_length= 30)
     email = models.EmailField(unique= True)
 
-    course = models.OneToOneField(Course, related_name='teacher')
+    course = models.OneToOneField(Course, on_delete=models.CASCADE, related_name='teacher')
 
     def __str__(self):
         return self.name
     
-
+    
