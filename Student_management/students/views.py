@@ -71,6 +71,17 @@ class StudentDetailView(APIView):
         student = self.get_object(pk)
         serializer = StudentSerializer(student)
         return Response(serializer.data)
+
+    def put(self, request, pk):
+        student = self.get_object(pk)
+        serializer = StudentSerializer(student, data = request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
+    def delete(self, request, pk):
+        student = self.get_object(pk)
+        student.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
     
 
     
