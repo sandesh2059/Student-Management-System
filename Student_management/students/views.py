@@ -60,6 +60,17 @@ class StudentView(APIView):
         serializer.save()
         return Response(serializer.data)
     
+class StudentDetailView(APIView):
 
+    def get_object(self, request, pk):
+        try:
+            student = Student.objects.get(pk=pk)
+        except Student.DoesNotExist:
+            return("no data found")
+    def get(self, request, pk):
+        student = self.get_object(pk)
+        serializer = StudentSerializer(student)
+        return Response(serializer.data)
+    
 
     
