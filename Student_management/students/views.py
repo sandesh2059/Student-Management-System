@@ -47,6 +47,19 @@ class CourseDetailAPI(APIView):
         course.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-        
+class StudentView(APIView):
+
+    def get(self, request):
+        students = Student.objects.all()
+        serializer = StudentSerializer(students, many = True)
+        return Response(serializer.data)
+    
+    def post(self, request):
+        serializer = StudentSerializer(data = request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
+    
+
 
     
