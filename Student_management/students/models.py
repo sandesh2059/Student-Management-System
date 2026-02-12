@@ -21,13 +21,14 @@ class Course(models.Model):
         return self.name
 
 class Student(models.Model):
-    name = models.CharField(max_length= 30)
+    first_name = models.CharField(max_length= 30)
+    last_name = models.CharField(max_length= 30)
     email = models.EmailField(unique=True)
-
-    course = models.ManyToManyField(Course,  related_name='students')
+    enrollment_date = models.DateTimeField(auto_now_add=True)
+    courses = models.ManyToManyField(Course,  related_name='students')
 
     def __str__(self):
-        return self.name
+        return f"{self.first_name} {self.last_name}"
 
 class Teacher(models.Model):
     name = models.CharField(max_length= 30)
