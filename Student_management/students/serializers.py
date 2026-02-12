@@ -14,8 +14,7 @@ class TeacherSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class StudentSerializer(serializers.ModelSerializer):
-    courses = serializers.PrimaryKeyRelatedField(queryset=Course.objects.all(), many=True)
-
+    courses = CourseSerializer(many = True, read_only = True)
     class Meta:
         model = Student
-        fields = '__all__'
+        fields = ['id', 'first_name', 'last_name', 'email', 'courses']
